@@ -8,15 +8,8 @@ using namespace std;
 int main ()
 {
     vector <int> answer = { 3, 4, 5, 6 };
-   /* answer.push_back(3);
-    answer.push_back(4);
-    answer.push_back(5);
-    answer.push_back(6);*/
     vector <int> guess = { 10, 10, 10, 10 };
-/*    guess.push_back(10);
-    guess.push_back(10);
-    guess.push_back(10);
-    guess.push_back(10);*/
+
     do
     {
         int cow = 0;
