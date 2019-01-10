@@ -1,10 +1,14 @@
-#include "stdlibfacilities.h"
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <cmath>
 using namespace std;
 
 int exit_check (string day, string val);
 int check_day (string day, int &reject_counter);
-void day_vals (vector <int> day);
-void day_sum (vector <int> day);
+void day_vals (vector <int> day, string name);
+void day_sum (vector <int> day, string name);
 
 int main ()
 {
@@ -18,6 +22,7 @@ int main ()
     vector <int> fri;
     vector <int> sat;
     vector <int> sun;
+    cout << "Please enter 'day of the week/value' pairs (e.g. monday 12). Once all pairs are entered please enter 'Exit' to end input.";
     while (cin >> day >> val)
     {
         if (exit_check(day, val) == 1)
@@ -28,7 +33,7 @@ int main ()
         {
         case 0:
         {
-            cout << day << "is not a day or synonym for one. Please try again.";
+            cout << day << " is not a day or synonym for one. Please try again.";
             break;
         }
         case 1:
@@ -68,32 +73,76 @@ int main ()
         }
         }
     }
-    day_vals(mon);
-    day_vals(tue);
-    day_vals(wed);
-    day_vals(thur);
-    day_vals(fri);
-    day_vals(sat);
-    day_vals(sun);
-    day_sum(mon);
-    day_sum(tue);
-    day_sum(wed);
-    day_sum(thur);
-    day_sum(fri);
-    day_sum(sat);
-    day_sum(sun);
+    day_vals(mon, "Monday");
+    day_vals(tue, "Tuesday");
+    day_vals(wed, "Wednesday");
+    day_vals(thur, "Thursday");
+    day_vals(fri, "Friday");
+    day_vals(sat, "Saturday");
+    day_vals(sun, "Sunday");
+    day_sum(mon, "mondays");
+    day_sum(tue, "tuesdays");
+    day_sum(wed, "wednesdays");
+    day_sum(thur, "thursdays");
+    day_sum(fri, "fridays");
+    day_sum(sat, "saturdays");
+    day_sum(sun, "sundays");
+    cout << endl << "There were " << reject_counter << " day/value pairs rejected.";
 }
 
 /*checks if exit code has been entered*/
-int exit_check (string day, string val);
+int exit_check (string day, string val)
+{
+    if (day == "Exit" || day == "exit" || day == "EXIT" || val == "Exit" || val == "exit" || val == "EXIT")
+    {
+        cout << "Exiting..";
+        return 1;
+    }
+    else
+        return 0;
+}
 
 /*checks if the input to day is a day or common synonym for one. Adds rejects to reject counter*/
-int check_day (string day, int &reject_counter);
+int check_day (string day, int &reject_counter)
+{
+    if (day == "monday" || day == "Monday"|| day == "MONDAY" || day == "mon" || day == "Mon" || day == "MON")
+    return 1;
+    else if (day == "tuesday" || day == "Tuesday"|| day == "TUESDAY" || day == "tue" || day == "Tue" || day == "TUE")
+    return 2;
+    else if (day == "wednesday" || day == "Wednesday"|| day == "WEDNESDAY" || day == "wed" || day == "Wed" || day == "WED")
+    return 3;
+    else if (day == "thursday" || day == "Thursday"|| day == "THURSDAY" || day == "thur" || day == "Thur" || day == "THUR")
+    return 4;
+    else if (day == "friday" || day == "Friday"|| day == "FRIDAY" || day == "fri" || day == "Fri" || day == "FRI")
+    return 5;
+    else if (day == "saturday" || day == "Saturday"|| day == "SATURDAY" || day == "sat" || day == "Sat" || day == "SAT")
+    return 6;
+    else if (day == "sunday" || day == "Sunday"|| day == "SUNDAY" || day == "sun" || day == "Sun" || day == "SUN")
+    return 7;
+    else 
+    reject_counter ++;
+    return 0;
+}
 
 /*outputs values of each days vector*/
-void day_vals (vector <int> day);
+void day_vals (vector <int> day, string name)
+{
+    cout << endl << name;
+    for (int i = 0; i < day.size(); i++)
+    {
+        cout << " " << day[i];
+    }
+}
 
 /*sums each days vector and outputs sum*/
-void day_sum (vector <int> day);
+void day_sum (vector <int> day, string name)
+{
+    int sum = 0;
+    for (int i = 0; i < day.size(); i++)
+    {
+        sum += day[i];
+    }
+    cout << endl << "The sum of " << name << " values is " << sum;
+}
 
 
