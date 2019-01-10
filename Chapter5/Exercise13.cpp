@@ -7,6 +7,7 @@
 using namespace std;
 
 void unique_rands (int seed, int members, vector <int> & a);
+void check_entry (string a, string & e, vector <int> & guess);
 
 int main ()
 {
@@ -19,19 +20,20 @@ int main ()
         else
         cout << "\nPlease enter a new seed number:";
         cin >> seed;
-        vector <int> guess = { 10, 10, 10, 10 };
+        vector <int> guess;
         vector <int> answer;
         unique_rands(seed, answer_size, answer);
         do
         {
+            vector <int> guess = { 10, 10, 10, 10 };
             int cow = 0;
             int bull = 0;
             cout << "Enter a guess (4 integers between 0 and 9):";
             for (int i = 0; i < answer.size(); i++)
             {
-                int entry;
-                cin >> entry;
-                guess[i] = entry;
+                string entry;
+                check_entry(entry, entry, guess);
+                guess[i] = stoi(entry);
             }
             for (int i = 0; i < answer.size(); i++)
             {
@@ -71,3 +73,18 @@ void unique_rands (int seed, int members, vector <int> & a)
             }
         }
 }
+
+void check_entry (string a, string & e, vector <int> & guess)
+{
+    cin >> a;
+    while ((a != "0" && a != "1" && a != "2" && a != "3" && a != "4" && a != "5" && a != "6" && a != "7" && a != "8"
+     && a != "9") || stoi(a) == guess[0] || stoi(a) == guess[1] || stoi(a) == guess[2] || stoi(a) == guess[3])
+    {
+        cout << "Your guess must be between 0 and 9 and not have been used previously this round. Try again: ";
+        cin >> a;
+    }
+    e = a;
+}
+
+
+
