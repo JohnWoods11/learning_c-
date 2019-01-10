@@ -145,4 +145,28 @@ void day_sum (vector <int> day, string name)
     cout << endl << "The sum of " << name << " values is " << sum;
 }
 
+/*questions:
+
+When i used a range for loop for day_sum and day_vals it seemed to iterate over 3 members at a time
+the loop i used looked like 'for (int i: days)'. why?
+
+Other than using to_lower which seemed outside the scope of this exercise is there an easier way to check
+against several options than the way i did in check_day and exit_check?
+
+Is there a way to access the name of a vector using cout. or must i also pass it as i did in check_day and 
+exit_check?
+
+When i called the day_vals and day_sums functions would it have been better practice to use a vector of the days
+and a for loop to call them? i.e.
+
+vector <string> days_names (mon - sun);
+vector <string> days_names_full (monday - sunday);
+
+for (int i = 0; i < days_names.size(); i++)
+{
+    day_vals(day_names[i], day_names_full[i]);
+    day_sum(day_names[i], day_names_full[i]);
+}
+*/
+
 
