@@ -1,17 +1,48 @@
 #include <string>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
-int exit_check (string day, string val);
+bool exit_check (string day, string val);
 int check_day (string day, int &reject_counter);
+int mainfunc();
+
 void day_vals (vector <int> day, string name);
+
+
 void day_sum (vector <int> day, string name);
+
+string lowercase(string input)
+{
+    std::locale loc;
+    for (int i=0; i<input.length(); ++i)
+    {
+        input[i] = std::tolower(input[i], loc);
+    }
+    return input;
+}
 
 int main ()
 {
+    try
+    {
+        return mainfunc();
+    }
+    catch(const exception &err)
+    {
+        cout << "MAJOR ERROR: " << err.what() << endl;
+        return -1;
+    }
+    catch(...)
+    {
+        cout << "MAJOR UNRECOGNISED ERROR\n";
+        return -1;
+    }
+
     int reject_counter = 0;
     string day;
     string val;
@@ -91,15 +122,15 @@ int main ()
 }
 
 /*checks if exit code has been entered*/
-int exit_check (string day, string val)
+bool exit_check (string day, string val)
 {
-    if (day == "Exit" || day == "exit" || day == "EXIT" || val == "Exit" || val == "exit" || val == "EXIT")
+    if (lowercase(day) == "exit" or lowercase(day) == "quit")
     {
         cout << "Exiting..";
-        return 1;
+        return true;
     }
     else
-        return 0;
+        return false;
 }
 
 /*checks if the input to day is a day or common synonym for one. Adds rejects to reject counter*/
@@ -124,25 +155,124 @@ int check_day (string day, int &reject_counter)
     return 0;
 }
 
-/*outputs values of each days vector*/
-void day_vals (vector <int> day, string name)
+/*outputs values of each days vector
+
+   name = "Monday"
+   day = { 1, 5, 6, 7, 10, 12 }
+
+   vector<float> widths = { 1.5, 2.0, 6.2 };
+
+   for (auto width : widths)
+   {
+       cout << width << " ";
+   }
+
+*/
+void day_vals (vector<int> values, string name)
 {
     cout << endl << name;
-    for (int i = 0; i < day.size(); i++)
+    for (auto value : values)
     {
-        cout << " " << day[i];
+        cout << " " << value;
     }
 }
 
 /*sums each days vector and outputs sum*/
-void day_sum (vector <int> day, string name)
+void day_sum (vector <int> values, string name)
 {
     int sum = 0;
-    for (int i = 0; i < day.size(); i++)
+    for (auto value: values)
     {
-        sum += day[i];
+        sum += value;
     }
     cout << endl << "The sum of " << name << " values is " << sum;
+}
+
+
+int mainfunc()
+{
+    vector< vector<int> > days;
+    vector<string> day_names;
+
+    for (int i=0; i<7; ++i)
+    {
+        days.push_back( vector<int>() );
+    }
+
+    day_names.push_back("Monday");
+    day_names.push_back("Tuesday");
+    day_names.push_back("Wednesday");
+    day_names.push_back("Thursday");
+    day_names.push_back("Friday");
+    day_names.push_back("Saturday");
+    day_names.push_back("Sunday");
+
+    map<string,int> day_tokens;
+
+    for (int i=0; i<day_names.size(); ++i)
+    {
+        day_tokens[ lowercase(day_names[i]) ] = i;
+    }
+
+    day_tokens["mon"] = 0;
+    day_tokens["tue"] = 1;
+
+    int reject_count = 0;
+
+    string input1, input2;
+
+    cout << "Create some input:\n";
+
+    while (true)
+    {
+        cin >> input1;
+
+        if (exit_check(input1, input1))
+        {
+            break;
+        }
+
+        cin >> input2;
+
+        if (exit_check(input2, input2))
+        {
+            break;
+        }
+
+        try
+        {
+            int day = day_tokens.at(lowercase(input1));
+
+            int date = stoi(input2);
+
+            if (date < 1 or date > 31)
+            {
+                throw invalid_argument(input2 + " is not between 1 and 31");
+            }
+
+            days[day].push_back(date);
+        }
+        catch(out_of_range e)
+        {
+            cout << "Invalid input: " << e.what() << " " << input1 << endl;
+            reject_count += 1;
+        }
+        catch(invalid_argument e)
+        {
+            cout << "Invalid input: " << e.what() << " " << input2 << endl;
+            reject_count += 1;
+        }
+    }
+
+    for (int i=0; i<7; ++i)
+    {
+        day_vals(days[i], day_names[i]);
+        day_sum(days[i], day_names[i]);
+    }
+
+    cout << endl << "Reject count equals " << reject_count << endl;
+
+    return 0;
 }
 
 /*questions:
