@@ -184,8 +184,8 @@
 
 ?? What is a user defined type? Why should we want one?
 
-// A user defined type is an object (class). Objects can make data easier to manage and use - for example by giving the ability to use member 
-// functions on different instances of the same type.
+// A user defined type is an object (class). Objects can make data easier to manage and use - for example by giving the ability to use the same
+// member functions on different instances of the same type.
 /////////////////////////////////////////////////////////
 
 ?? What is the interface to a C++ user defined type?
