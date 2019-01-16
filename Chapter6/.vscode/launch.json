@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/try-these/calculator01.out",
+            "program": "${workspaceFolder}/drills/drill_01.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
