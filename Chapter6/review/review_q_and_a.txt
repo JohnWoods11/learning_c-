@@ -1,0 +1,201 @@
+?? What do we mean by "Programming is understanding"?
+
+// To be able to program you must first understand the problem that you are creating a solution for.
+////////////////////////////////////////////////
+
+?? The chapter details the creation of a calculator program. Write a short analysis of what the calulator should be able to do.
+
+// Take input
+// Tokenize input
+// Parse tokens and carry out relevant functions
+// Output result (included in previous step)
+/////////////////////////////////////////////////
+
+?? How do you break up a problem into smaller manageable parts?
+
+// look for tools, libraries etc that can be used rather than writing your own code.
+// If the solution can be seperated, do so. Subcontract work to seperate functions wherever you can, idealy each function should
+// only do one thing. Never repeat yourself - If you have to do something more than once it should be its own function.
+////////////////////////////////////////////////////
+
+?? Why is creating a small, limited version of a program a good idea?
+
+// The initial problem is much smaller, much easier to comprehend and work with in your head.
+// Any bugs within the core of your program will be much easier to deal with.
+// Any bugs outside the core will be much easier to fix knowing your core program works.
+// You will feel achievement that you wouldn't otherwise when the limited version works.
+///////////////////////////////////////////////////
+
+?? Why is feature creep a bad idea?
+
+// When you add features you add to the amount of work you need to do before you have a functioning program and if you 
+// keep adding new features you may never finish. It is better to add features to a functioning program. Also it may be easier with
+// the knowledge gained creating that functional program.
+////////////////////////////////////////////////////
+
+?? What are the three main phases of software development?
+
+// analysis
+// design
+// implementation
+////////////////////////////////////////////////////
+
+?? What is a "use case"?
+
+// A reason for the program existing. A problem for which it is the solution to.
+/////////////////////////////////////////////////////
+
+?? What is the purpose of testing?
+
+// To ensure that the program does what it is supposed to do and nothing else.
+// To ensure potential users will be able to do what is intended with the program.
+/////////////////////////////////////////////////////
+
+?? According to the outline in the chapter, describe the difference between a Term, an expression, a number and a primary.
+
+// A term is a primary but also a term followed by a *, / or % and then a primary.
+// An expression is a term but also an expression followed by a + or a - and then a term.
+// A number is only a floating-point-literal.
+// A primary is a number but also a expression withiin parentheses.
+//////////////////////////////////////////////////////
+
+?? In the chapter, an input was broken down into its component terms, expressions, primarys, and numbers. Do this for (17 + 4)/(5-1).
+
+
+/*
+                                 expression
+                                     |
+                                    term                               
+                |---------------------------------------|                      
+                |                    |                  |
+               term                  |                  |
+                |                    |                  |
+              primary                |                primary
+                |                    |                  |
+   |------------|-------------|      |      |-----------|------------|
+   |            |             |      |      |           |            |
+   |        expression        |      |      |       expression       |
+   |            |             |      |      |           |            |
+   |     |--------------|     |      |      |     |--------------|   |
+   |     |      |       |     |      |      |     |              |   |
+   | expression |       |     |      |      |expression |        |   |
+   |     |      |       |     |      |      |     |     |        |   |
+   |   Term     |     Term    |      |      |   Term    |      Term  |
+   |     |      |       |     |      |      |     |     |        |   |
+   |  primary   |     primary |      |      |  primary  |    primary |
+   |     |      |       |     |      |      |     |     |        |   |
+   |   number   |     number  |      |      |   number  |     number |
+   |     |      |       |     |      |      |     |     |        |   |
+   
+   (    17      +       4     )      /      (     5     -        1   )
+
+*/
+/////////////////////////////////////////////////
+
+?? Why does the program not have a function called number()?
+
+// As number is only a floating point literal the only thing it will ever be is t.value. Therefore there is no reason
+// to create a function that would return t.value when you could just return t.value rather than calling the function.
+////////////////////////////////////////////////
+
+?? What is a token?
+
+// A token is a user defined type (class) where a sequence of characters can be used to represent something we consider a unit.
+////////////////////////////////////////////////
+
+?? What is a grammar? A grammar rule?
+
+// A grammar is a way of designating the units that make up a larger construct and specifying the way in which that larger construct
+// must be constructed. A grammar rule is a rule to this point so could be a rule stipulating what a certain construct can be made up of
+// or the order in which its components must be for it to be said construct.
+///////////////////////////////////////////////////
+
+?? What is a class? What do we use classes for?
+
+// A class is a user defined type. We use classes so that we can store relevant data within them and create functions called
+// member functions that can be used by our classes.
+////////////////////////////////////////////////
+
+?? How can we provide a default value for a member of a class?
+
+// Initialise the member with the default value.
+//////////////////////////////////////////////////
+
+?? In the expression function, why is the default for the switch statement to "put back" the token?
+
+// Because if the token was not of t.kind + or - the expression() function will not use it, therefore to make sure it is not eaten by 
+// the expression function and is passed on to the next function it must be put back into the token stream so that the next function 
+// can get it and try to use it.
+//
+// I believe the only time the default switch in expression will be called will be in the case of a 'x' or '=' t.kind. So specifically
+// the 'x' or '=' needs to be put back into 'Token_stream ts' so that the main function can use ts.get to carry out its if statements.
+////////////////////////////////////////////////////
+
+?? What is "look-ahead"?
+
+// In this particular case it the process of checking the input ahead of time so that it is known what to do with it and even the inputs 
+// that came before it. In the case of expression() this manifests in looking ahead to see if the next token is t.kind 'x', '=' and 
+// carrying out left-=term() or returning left to main if it isn't so it can check the t.kind against its conditions.
+//////////////////////////////////////////////////////
+
+?? What does void Token_stream::put_back(Token t) do and why is it useful?
+
+// It puts the token 't' back into the relevant token stream buffer so it may then be re-accesed by the Token Token_stream::get() member
+// function. It is useful for when you want to look at what the next input is but only want to use it in specific circumstances; therefore
+// if you don't use it you can return it to the token stream to be accesed when it is needed - meaning tokens arent eaten by functions.
+/////////////////////////////////////////////////////
+
+?? Why is the remainder (modulus) operation, % difficult to implement in the term()?
+
+// Term deals with numbers; which are floating-point-literals or expressions enclosed in parentheses which also evaluate to floating-point-literals.
+// The modulus operator is not defined for floating-point-literals therefore it is not simple to implement.
+//////////////////////////////////////////////////////////
+
+?? What do we use the two data members of the Token class for?
+
+// t.kind is used to display the type of token, whether that be floating-point number, operator or function command. t.value is only used
+// when dealing with floating-point numbers and is used to display their values.
+////////////////////////////////////////////////////////////
+
+?? Why do we sometimes split a class's members into private and public members?
+
+// For ease of use and security. The user will need to know some members of the class for them to be able to use it. However they will generally 
+// not need to know their implementation and members related to it, therefore making it private stops them from messing with that code or anything
+// they don't need.
+//////////////////////////////////////////////////////////////
+
+?? What happens in the Token_stream class when there is a token in the buffer and the get function is called?
+
+// The Token_stream class emptys the buffer by setting full=false. (it then returns the token that was in the buffer to the caller of get).
+////////////////////////////////////////////////////////////
+
+?? Why were the ';' and 'q' statements added to the switch statement in the get() function of the Token_stream class?
+
+// Because these are the commands originaly used to terminate the program or print the result respectively. As all input flowed through
+// Token_stream it had to have functionality with these inputs otherwise it would return the 'bad token' error when it should have been
+// parsing them.
+/////////////////////////////////////////////////////////////
+
+?? When should we start testing our program?
+
+// We should test our understanding of the problem it is solving and the logic of the solution to the problem before we have even written
+// any code. We should test the code as soon as we have functionality.
+/////////////////////////////////////////////////////////////
+
+?? What is a user defined type? Why should we want one?
+
+// A user defined type is an object (class). Objects can make data easier to manage and use - for example by giving the ability to use member 
+// functions on different instances of the same type.
+/////////////////////////////////////////////////////////
+
+?? What is the interface to a C++ user defined type?
+
+// The public section of a user defined type is the interface. This contains all relevant members for using the user defined type.
+//////////////////////////////////////////////////////////
+
+?? Why do we want to rely on libraries of code?
+
+// Because they hold tools that can be used to carry out tasks in your programs. As the book says 'there is no point in redesigning the wheel'.
+// This saves time that you would have spent writing and testing the code.
+/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
