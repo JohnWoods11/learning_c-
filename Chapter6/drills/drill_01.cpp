@@ -161,20 +161,22 @@ double expression()
 int main()
 try
 {
+    double val = 0;
     while (cin) {                                                                               //Struggling to understand why cin remains true
                                                                                                 //without there being anything in the input stream.
                                                                                                 //I'm assuming it doesn't mean is there anything in
                                                                                                 //the input stream and rather does the input stream
                                                                                                 //exist?
-        Token t = ts.get();
-        double val = 0;                                                                         //Initialy thought this would assign 0 to val 
-                                                                                                //each time it passed causing line 170 to output
-        if (t.kind == 'q') break; // 'q' for quit                                               //0. Is this not the case because C++ knows it
-        if (t.kind == ';')        // ';' for "print now"                                        //it is an initialisation and not assignment so
-            cout << "=" << val << '\n';                                                         //ignores it once val has been initialised?
+        Token t = ts.get();                                                                          
+                                                                                                
+        if (t.kind == 'q') break; // 'q' for quit                                               
+        if (t.kind == ';')        // ';' for "print now"                                        
+            cout << "=" << val << '\n';                                                         
         else
+        {
             ts.putback(t);
-        val = expression();
+            val = expression();
+        }
     }
 	keep_window_open();
 }
