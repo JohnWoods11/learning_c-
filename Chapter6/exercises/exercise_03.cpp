@@ -1,5 +1,12 @@
 #include "../stdlibfacilities.h"
 
+int fact(int left)
+{
+    int result = left;
+    for (int i = left - 1; i > 0; i--)
+    result *= i;
+    return result;
+}
 
 class Token {
 public:
@@ -57,7 +64,7 @@ Token Token_stream::get()
     switch (ch) {
     case '=':    // for "print"
     case 'x':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/': case '{': case '}': 
+    case '(': case ')': case '+': case '-': case '*': case '/': case '{': case '}': case '!': 
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -111,21 +118,48 @@ double primary()
 
 //------------------------------------------------------------------------------
 
+// deal with !
+double factorial()
+{
+    double left = primary();
+    Token t = ts.get();       // get the next token from token stream
+
+    while (true)
+    {
+        switch (t.kind)
+        {
+        case '!':
+        {
+            int int_left = left;
+            int int_result = fact(int_left);
+            double result = int_result;
+            left = result;
+            t = ts.get();
+            break;
+        }
+        default:
+            ts.putback(t);
+            return left;
+        }
+    }
+}
+//------------------------------------------------------------------------------
+
 // deal with *, /, and %
 double term()
 {
-    double left = primary();
+    double left = factorial();
     Token t = ts.get();        // get the next token from token stream
 
     while(true) {
         switch (t.kind) {
         case '*':
-            left *= primary();
+            left *= factorial();
             t = ts.get();
             break;
         case '/':
             {    
-                double d = primary();
+                double d = factorial();
                 if (d == 0) error("divide by zero");
                 left /= d; 
                 t = ts.get();
@@ -169,8 +203,8 @@ int main()
 try
 {
     cout << "Welcome to our simple calculator." << endl << "Please enter expressions using floating-point numbers." << endl <<
-    "Supported operators are parentheses '( , )' or '{ , }', multiplication '*', division '/', addition '+' and subtraction '-'." << endl <<
-    "To print the result of your expression enter '=' and to quit the program enter 'x'." << endl;
+    "Supported operators are parentheses '( , )' or '{ , }', factorial '!', multiplication '*', division '/', addition '+' and subtraction '-'." <<
+    endl << "To print the result of your expression enter '=' and to quit the program enter 'x'." << endl;
     double val = 0;
     while (cin) {                                                                               //Struggling to understand why cin remains true
                                                                                                 //without there being anything in the input stream.
