@@ -62,9 +62,11 @@ int main ()
     try
     {
         bulls_and_cows();
+        return 0;
     }
     catch (...)
     {
         cout << "MAJOR ERROR" << endl;
+        return -1;
     }
 }
