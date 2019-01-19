@@ -1,0 +1,22 @@
+Grammar for bitwise logical expressions:
+
+bitwise_expression
+    or_operand
+    bitwise_expression | or_operand                                                             //struggled with naming
+
+or_operand
+    exor_operand
+    or_operand ^ exor_operand
+    
+
+exor_operand
+    and_operand
+    exor_operand & and_operand
+
+and_operand
+    int
+    !int
+    ~int
+
+int
+    integer
