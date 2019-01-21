@@ -35,27 +35,37 @@ string part()
 string sentence()
 {
     string left = part();
+
     while (true)
     {
-    string next = part();
-    if (left == "sentence")
-    {
-        if (next == "conjunction")
+        string next = part();
+
+        if (left == "sentence")
         {
-            if (part() == "sentence")
-            left = "sentence";
-            else 
-            left = "invalid";
+            if (next == "conjunction")
+            {
+                if (part() == "sentence")
+                {
+                    left = "sentence";
+                }
+                else 
+                {
+                    left = "invalid";
+                }
+            }
+            else if (next == ".")
+            {
+                return left;
+            }
+            else
+            {
+                left = "invalid";
+            }
         }
-        else if (next == ".")
-        return left;
-        else
-        left = "invalid";
-    }
-    if (next == ".")
-    {
-        return left;
-    }
+        if (next == ".")
+        {
+            return left;
+        }
     }
 }
 

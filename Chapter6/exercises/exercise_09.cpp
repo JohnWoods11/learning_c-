@@ -47,13 +47,21 @@ void output_conversion()
     for (auto value:conversion)
         cout << value;
     cout << " is ";
+
+    bool started = false;
+
     for (int i = 0; i < conversion.size(); i++)
     {
-        cout << conversion[i] << " " << dec_modifier[conversion.size()-i];
-        if (conversion[i] > 1)
-        cout << "s";
-        if (i != conversion.size()-1)
-        cout << " and ";
+        if ((not started) and (conversion[i] > 0)){ started = true; }
+
+        if (started)
+        {
+            cout << conversion[i] << " " << dec_modifier[conversion.size()-i];
+            if (conversion[i] != 1)
+                cout << "s";
+            if (i != conversion.size()-1)
+                cout << " and ";
+        }
     } 
     cout << "." << endl;
 }
@@ -69,4 +77,6 @@ int main ()
     cout << "MAJOR ERROR." << endl;
     return -1;
     }
+
+    return 0;
 }

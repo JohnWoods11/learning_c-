@@ -18,6 +18,8 @@ void take_guess(vector <char> & guess)
     cout << "\nEnter a guess (4 lower-case letters (a - z))" << endl;
     for (int i = 0; i < guess.size(); i++)                                                      //tried to assign guess with a range for loop
        guess[i] = check_input();                                                                //for (auto value:guess)
+
+    //for (auto &value : guess){ value = check_input(); }
 }                                                                                               //   value = check_input();
                                                                                                 //but would not assign, because reference?
 void check_guess(vector <char> & guess, vector <char> & answer, int & bulls, int & cows)

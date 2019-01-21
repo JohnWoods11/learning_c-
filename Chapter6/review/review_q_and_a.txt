@@ -43,6 +43,7 @@
 ?? What is a "use case"?
 
 // A reason for the program existing. A problem for which it is the solution to.
+a use case is a usage example of the code. So for the calculator, user enters 3 + 5 and expects 8 to be returned
 /////////////////////////////////////////////////////
 
 ?? What is the purpose of testing?
