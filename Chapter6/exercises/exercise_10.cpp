@@ -76,12 +76,12 @@ int nums_check(int &possible_nums, int &set_size)
 {
     cout << "Please enter the two integers you would like to see the permutations or combinations for." << endl << "Amount of possible numbers: ";
     cin >> possible_nums;
-    if (cin.fail())
+    if (cin.fail())                                                                                         //input not an integer
     {
         throw invalid_argument("input must be an integer");
     }
     cout << "Amount of numbers in set: ";
-    if (cin.fail())
+    if (cin.fail())                                                                                         //input not an integer
     {
         throw invalid_argument("input must be an integer");
     }
