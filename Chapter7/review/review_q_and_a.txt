@@ -1,0 +1,178 @@
+Chapter 7 review questions
+
+
+?? What is the purpose of working on the program after the first version works? Give a list of reasons.
+
+// find/fix bugs
+// improve useability
+// optimisation
+// add features
+// make maintenence easier
+////////////////////////////////////////////////////////////////////
+
+
+?? Why does "1+2; q" typed into the calculator not quit after it recieves an error?
+
+// q is not the current quit keyword. If using exit which is the current keywordthe program terminates.
+////////////////////////////////////////////////////////////////////
+
+
+?? Why did we decide to make a constant character called number?
+
+// To improve the readability of the code. Rather than an ambiguous token refered to as *.kind = '8' it is refered to as *.kind = number.
+/////////////////////////////////////////////////////////////////////
+
+
+?? We split main() into two seperate functions. What does the new function do and why did we split main()?
+
+// The new function is called calculate() and consists of the calculation loop. 
+
+// Originally main() contained the calculation loop along with error handling. 
+//
+// In order to have main carry out one logical function the calculation loop was subcontracted to another functionwhilst main() retained
+// the job of being the scaffolding of the program - beginging/ending the program and handling fatal errors.
+///////////////////////////////////////////////////////////////////////
+
+
+?? Why do we split code into multiple functions? State principles.
+
+// To contain the entire function within one screen.
+// To understand the functions task simply; by virtue of it being a single logical process.
+// To simplify code into symbolic function names rather than source code.
+// To find the source of errors more easily.
+// To make it easier to write programs as they are a logical set of steps.
+//////////////////////////////////////////////////////////////////////////
+
+
+?? what is the purppose of commenting and how should it be done?
+
+// To make your code more readable to yourself and other programmers and therefore make code maintenence and alteration easier. Anything that
+// can be said by code should be using code that reflects intent. Anything that can'tbe expressed this way should be expressed in comments which
+// are clear and concise without being superfluous. If this is not possible then perhaps the source code is too complex.
+///////////////////////////////////////////////////////////////////////////
+
+
+?? What does narrow_cast do?
+
+// Looking at page 153 in PPP. narrow_cast is a function defined in std_lib_facilities.h that can be used to see if a narrow cast error
+// will occur when converting a value. If the value won't fit into the type you are casting it to function will throw an exception.
+////////////////////////////////////////////////////////////////////////////////
+
+
+?? What is the use of symbolic constants?
+
+// Symbolic constants make code much more readable. Rather than having ambiguous literals in the code the name represents its meaninf ing the
+// code. Also if there is a need to change the particular literal that has been used and represented by the symbolic constant you must only change
+// a single instance of it rather than looking through the code for every time it is refered to and changing them all.
+//////////////////////////////////////////////////////////////////////////////////
+
+
+?? Why do we care about code layout?
+
+// Code layout is an important tool in making code more understandable. If you can see the entirety of a function at once (i.e on one screen) 
+// it is much easier to read and understand the function; Code layout can be a way of achieving this one screen ideal by making efficient use
+// of space while retaining readability. Code layout that is too compressed can also be an issue, with it being hard to make the distinction 
+// between seperate elements. Indentation is a very important convention that can aid in this regard.
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+?? How do we handle % (remainder) of floating-point numbers?
+
+// There were two ways of handling the modulus function when using floating-point numbers in this chapter. The more favourable method in my
+// opinion is to use the fmod function from the std library that has functionality for floating-point numbers. The other option is to 
+// create a function yourself that will evaluate the remainder for floating-point numbers.
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+?? What does is_declared() do and how does it work?
+
+// is_declared is a function that checks to see if a variable has been declared already and returns the boolean true to declaration()
+// if it has. 
+//
+// is_declared recieves a string paramater from declaration(). It then iterates through the members of the vector of variables 'names' checking
+// the *.name of each member against the string paramater it recieved from declaration(). If any *.name is equivilant to the string parameter: it
+// returns true to declaration() and if none are it returns false.
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+?? The input representation for let is more than character. How is it accepted as a single token in the modified code?
+
+// The function that deals with this input is called 'get()' and is a public member function of Token_stream. If the character 'get()' takes from cin 
+// is an alphabetical character (determined by stdlibrary function 'isalpha()') it then concatenates the following characters providing they are 
+// alphabetical or numerical ('isalpha()', 'isdigit()') until it reaches whitespace (cin.get doesn't ignore whitespace). It then checks the input
+// against tghe input representation for let as well as other multiple-character accepted inputs and returns the relevant token.
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+?? What are the rules for which names can and cannot be accepted in the calculator program?
+
+// The name must start with an alphabetical character
+// The name must only contain alphabetical or numerical characters
+// The name can not contain any whitespace
+// The name can not have been previously used
+// The name can not be the same as any input representation that the calculator accepts 
+///////////////////////////////////////////////////////////////////////////////////
+
+
+?? Why is it a good idea to build a program incrementally?
+
+// In the case of breaking a program up as you make it: using this method you are only focusing on one logical action at a time making it much
+// easier to understand what you trying to do and therefore implementing it.
+// In the case of making iterations of the same program adding to it incrementally each time: some things are not worth worrying about until 
+// you have a basic working version of the program you are making. There is no point in worrying about specific error handling until you have 
+// something that can actualy return errors, the same is true for many non critical parts of your program. Also you will only realise when 
+// certain parts of the program need revision after you have got it working and testing reveals them. Finally creating the initial working 
+// program is a learning experience and during this learning experience it is highly likely you will come across something that you would likely
+// want to include in future versions of your program. These, along with things like optimisation, readability and maintenence are all good reasons
+// for building your programs incrementally.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? When do you start to test?
+
+// As soon as you begin - you can test your logic and understanding before you have even written any code. With regards to code the answer is the 
+// same. Individual functions can be tested as soon as they are written.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? When do you retest?
+
+// As soon as you have made any change to the code.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? How do you decide what should be a seperate function?
+
+// Is the code a seperate logical action? If so then it should be a seperate function. 
+// Are you doing the same thing more than once across your code? If so then it should be a seperate function.
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? How do you choose names for variables and functions? List possible reasons.
+
+// You choose variable and function names that are representative of what they do (functions) or what they are (variables). This should be to the
+// point that anybody reading the function or variable should know what it does or what it is just from the name.
+// Names should be distinct from any other name that has been used and not be overly shortened.
+// Make them clear and concise and therefore not overly verbose. 
+// Making them easy to type is not an ideal, a good ide makes this irrelevant
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? Why do you add comments?
+
+// so that anyone who is reading your code can understand what it is meant to do and how it is meant to do it.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? what should be in comment and what should not?
+ 
+// Anything that can be said in code should be said in code only. Any intent or method that can not be expressed clearly and easily by code
+// should be expressed in comments.
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+?? When do we consider a program finished?
+
+// Strictly speaking a program won't be finished until it is no longer used as maintenence and revision can happen all the way through a programs
+// lifetime. However you could consider a program finished when you have created something that conforms to your analysis which has been rigorously 
+// tested and is deemed ready for use.

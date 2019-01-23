@@ -1,0 +1,32 @@
+Input for testing:
+
+5;
+b;
+5+5;
+5-5;
+5/5;
+5*5;
+5+5*5;
+5+5/5;
+(5+5)*5;
+(5+5)/5;
+let blah = 5;
+blah;
+let blahblah = blah;
+blahblah;
+let 5blah = 5;
+let bl_ah = 5;
+let bl ah = 5;
+let bl@h = 5;
+let blah = 3*7;
+let blah2 = 3*7;
+blah2;
+let blah3 = (3+3) * 7;
+blah3;
+let blah4 3;
+5c + 2;
+-5 + 3;
++5 + 3;
+5 / 0;
+5 + c;
+5blah + 2;
