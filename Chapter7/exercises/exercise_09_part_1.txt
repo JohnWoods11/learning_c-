@@ -1,0 +1,13 @@
+Think of three improvements that could be made to the calculator.
+
+1:
+After a non fatal error the calculator could return to a state where it is ready for input rather than requireing print to be entered
+before it prompts for next input.
+
+Implemented.
+
+2:
+The calculator could come with more functions, things like cos or tan or even the permutation and combination functions from the previous chapter.
+
+3:
+The calculator could come with regularly used constants such as pi, e, c among others.
