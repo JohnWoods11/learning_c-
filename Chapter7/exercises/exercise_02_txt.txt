@@ -1,0 +1,6 @@
+
+
+
+Creating an assignment operator can be a source of problems due to the fact that without proper care the user would be able to change any 
+pre-declared variables. However is is useful to the user as it allows the to correct any mistakes used when declaring the value, have variables
+that reflect real life non constant variables and carry out operations on these variables.
