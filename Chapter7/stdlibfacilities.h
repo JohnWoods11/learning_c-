@@ -45,3 +45,14 @@ inline void error(const string& s)
 	throw runtime_error(s);
 }
 //------------------------------------------------------------------------------
+
+template <typename Target, typename Source>
+Target narrow_cast(Source src)
+{
+    Target tgt = src;
+
+    if ((Source)tgt != src)
+        error("Invalid narrowing conversion");
+
+    return tgt;
+}
