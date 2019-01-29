@@ -108,19 +108,19 @@ Created by John Woods January 2019
 
 #include "../stdlibfacilities.h"
 
-//Class for handling the game
-class Game_handler
+/** Class the hande the game */
+class BullsAndCows
 {
-    public:
+public:
     void print_instruction();
-    void Bulls_and_Cows();                                                      // Should these be classes themselves?
+    void play_game();                                                      // Should these be classes themselves?
+    bool should_play_again();
+    
+private:                                                                
     void answer_generator();
     void guess_handler();
     void guess_checker();
-    void play_again();
-    
 
-    private:                                                                
     void output_score();
     void count_bulls_and_cows();
     void is_cow(int i);
@@ -128,20 +128,21 @@ class Game_handler
     void seed_generator();
     bool is_new_seed();
     bool is_unique(int val, vector<int> & vec);
-    vector<int>answers;
-    vector<int>guesses;
-    vector<int>used_seeds;
-    bool correct;
-    bool again = true;
-    int seed;
+
+    /** All of the answers */
+    vector<int> answers;
+    /** All of the guesses */
+    vector<int> guesses;
+    vector<int> used_seeds;
+    int seed = 0;
     int round = 1;
-    int bulls;
-    int cows;
+    int bulls = 0;
+    int cows = 0;
+    bool correct = false;
+    bool again = true;
 };
 
-Game_handler game_instance;
-
-void Game_handler::play_again()
+bool BullsAndCows::should_play_again()
 {
     string str;
     while (true)
@@ -155,7 +156,7 @@ void Game_handler::play_again()
             {
                 again = false;
                 cout << "Goodbye." << endl;
-                return;
+                return false;
             }
             else
             {
@@ -163,7 +164,7 @@ void Game_handler::play_again()
                 correct = false;
                 round++;
                 used_seeds.push_back(seed);
-                return;
+                return true;
             }
         }
         catch (const exception &err)
@@ -172,7 +173,7 @@ void Game_handler::play_again()
         }
 }
 
-bool Game_handler::is_unique(int val, vector<int> & vec)
+bool BullsAndCows::is_unique(int val, vector<int> & vec)
 {
     for (auto value:vec)                                                                    // Would it be better to use answers directly here 
         {                                                                                   // rather than this reference
@@ -184,7 +185,7 @@ bool Game_handler::is_unique(int val, vector<int> & vec)
         return true;
 }
 
-void Game_handler::output_score()
+void BullsAndCows::output_score()
 {
     cout << "You scored " << bulls << " bull";
     if (bulls != 1)
@@ -207,7 +208,7 @@ void Game_handler::output_score()
     }   
 }
 
-void Game_handler::is_cow(int guess)
+void BullsAndCows::is_cow(int guess)
 {
     for (auto value:answers)
         if (guess == value)
@@ -217,7 +218,7 @@ void Game_handler::is_cow(int guess)
             }
 }
 
-void Game_handler::count_bulls_and_cows()
+void BullsAndCows::count_bulls_and_cows()
 {
     for (int i = 0; i < guesses.size(); i++)
     {
@@ -232,7 +233,7 @@ void Game_handler::count_bulls_and_cows()
     }
 }
 
-bool Game_handler::is_new_seed()
+bool BullsAndCows::is_new_seed()
 {
     for (auto value:used_seeds)
         if (seed == value)
@@ -240,7 +241,7 @@ bool Game_handler::is_new_seed()
     return true;
 }
 
-int Game_handler::check_input()
+int BullsAndCows::check_input()
 {
     string str;
     cout << "Enter a guess: ";
@@ -261,7 +262,7 @@ int Game_handler::check_input()
         }    
 }
 
-void Game_handler::guess_checker()
+void BullsAndCows::guess_checker()
 {
     bulls = 0;
     cows = 0;
@@ -274,7 +275,7 @@ void Game_handler::guess_checker()
 }
 
 
-void Game_handler::guess_handler()
+void BullsAndCows::guess_handler()
 {
     guesses = {10, 10, 10, 10};
     for (auto &values:guesses)
@@ -282,7 +283,7 @@ void Game_handler::guess_handler()
 }
 
 
-void Game_handler::answer_generator()
+void BullsAndCows::answer_generator()
 {
     srand(seed);
     answers = {10,10,10,10};
@@ -290,13 +291,13 @@ void Game_handler::answer_generator()
     {
         int val;
         val = rand() % 10;
-        while (Game_handler::is_unique(val, answers) == false)            
+        while (BullsAndCows::is_unique(val, answers) == false)            
             val = rand() % 10;        
         value = val;                                                                        // Any way to do this in two lines rather than 3?
     }                                                                                       // Would it be better to not pass answers as reference
 }                                                                                           // and just access it from is_unique?
 
-void Game_handler::seed_generator()
+void BullsAndCows::seed_generator()
 {
     if (round == 1)
     {
@@ -317,7 +318,7 @@ void Game_handler::seed_generator()
 
 
 //instructions on how to play
-void Game_handler::print_instruction()
+void BullsAndCows::print_instruction()
 {
     cout << "Welcome to bulls and cows" << endl << "The aim of the game is to guess the 4 secret numbers and the order they are in." << endl
     << "If you guess a number and you get it in the right position, you get a bull." << endl << 
@@ -326,28 +327,38 @@ void Game_handler::print_instruction()
 }
 
 //handle the game loop
-void Game_handler::Bulls_and_Cows()                                               // Orighaly was not part of Game_handler so should i 
+void BullsAndCows::play_game()                                               // Orighaly was not part of BullsAndCows so should i 
 {                                                                                 // still call the member functions with the game_instance
-    print_instruction();                                                          // function?
     while (again == true)
     {
-        game_instance.seed_generator();
-        game_instance.answer_generator();
-        while (game_instance.correct == false)                                    // Would it make more sense to a reader 
+        seed_generator();
+        answer_generator();
+        while (correct == false)                                    // Would it make more sense to a reader 
         {                                                                         // if correct is called after guess checker? Would it 
-            game_instance.guess_handler();                                        // be better to use a do while loop or is there another way
-            game_instance.guess_checker();                                        // to do this?
+            guess_handler();                                        // be better to use a do while loop or is there another way
+            guess_checker();                                        // to do this?
         }
-        game_instance.play_again();
     }
-
 }
+
+
+///////
+/////// 
+///////
 
 int main()
 {
     try
     {
-        game_instance.Bulls_and_Cows();
+        BullsAndCows game;
+ 
+        game.print_instruction();
+
+        do
+        {
+           game.play_game();
+
+        } while (game.should_play_again());
     }
     catch(...)
     {

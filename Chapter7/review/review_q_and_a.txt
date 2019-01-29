@@ -107,7 +107,7 @@ Chapter 7 review questions
 ?? What are the rules for which names can and cannot be accepted in the calculator program?
 
 // The name must start with an alphabetical character
-// The name must only contain alphabetical or numerical characters
+// The name must only contain alphabetical or numerical characters - alphanumeric (ascii = 1 byte chars, utf-8 ~1 byte all character sets - unicode)
 // The name can not contain any whitespace
 // The name can not have been previously used
 // The name can not be the same as any input representation that the calculator accepts 
@@ -176,3 +176,6 @@ Chapter 7 review questions
 // Strictly speaking a program won't be finished until it is no longer used as maintenence and revision can happen all the way through a programs
 // lifetime. However you could consider a program finished when you have created something that conforms to your analysis which has been rigorously 
 // tested and is deemed ready for use.
+
+A program is ready for production when it fulfills the brief and all of the test pass.
+(and it is fully documentation, has examples, has easy packaging/compilation instructions, has tests for hte user to monitor compliance, has enough documenations to allow other developers to maintain the program etc.)

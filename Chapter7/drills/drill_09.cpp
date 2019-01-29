@@ -213,7 +213,16 @@ double primary()
 		{
 			error("',' expected");
 		}
-		int i = primary();											// the book asks to require i to be an integer using the technique we used for 
+		int i;
+		try
+		{
+			i = narrow_cast<int, double>(primary());
+		}
+		catch(const std::exception& e)
+		{
+			throw invalid_argument("Error: expected an interger!");
+		}
+		
 		t = ts.get();													// % however i could not find this technique. I found the technique whereby 
 		if (t.kind != ')')											// we used fmod to give float functionality and this would just involve using
 		{															// powf(x,i). I'm not sure if the book meant use the technique we used for 

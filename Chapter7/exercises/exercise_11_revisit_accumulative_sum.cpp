@@ -104,31 +104,29 @@ encapsulate above into class
 
 #include "../stdlibfacilities.h"
 
+/** Handles functionality for number collection and multiple summations of from series begining to user specified end point.*/
 class accumulator
 {
 
-    public:
-    void user_interface();
-
-    private:
+public:
     void print_instructions();
-    void try_another_calculation();
+    void store_doubles();
     void print_sum_doubles();
+    bool should_try_again();
+ 
+private:
     void sum_doubles();
     void get_number_of_doubles_to_sum();
-    void store_doubles();
     void check_series_input();
     string check_yes_no_input();
     double sum_of_first_n_doubles;
     int number_of_doubles_to_sum;
     vector<double> series;
-    bool new_series = true;                                                            
-    bool calculate_again = true;                                                      // is initialising here bad?
-    bool input_termination;
+    bool new_series = true;                                                             
+    bool input_termination = false;
 };
 
-accumulator instance;
-
+/**Print the instructions for use of the accumulator*/
 void accumulator::print_instructions()
 {
     cout << "First enter a series of values. (they can be integers or floating-point values)" << endl <<
@@ -136,6 +134,7 @@ void accumulator::print_instructions()
     endl << "The program will sum the first N values. (N being the number you input)" << endl << endl;
 }
 
+/**Parse user input into the answer to a yes or no question*/
 string accumulator::check_yes_no_input()
 {
     string str;
@@ -157,28 +156,30 @@ string accumulator::check_yes_no_input()
      }
 }
 
-void accumulator::try_another_calculation()
+/**Ask the user if they would like to continue using the accumulator*/
+bool accumulator::should_try_again()
 {
     cout << "Would you like to try another calculation with the same series? (y/n)" << endl;
     if (check_yes_no_input() == "y")
     {
         new_series = false;
-        return;
+        return true;
     }
     cout << endl << "Would you like to try another calculation with a new series? (y/n)" << endl;
     if (check_yes_no_input() == "y") 
     {
         new_series = true;
         series.clear();
-        cout << "Series:" << endl;
-        return;
+        return true;
     }
-    calculate_again = false;    
+    return false;
 }
 
+/**Print the sum of the values the user requested*/
 void accumulator::print_sum_doubles()
 {
-    
+    get_number_of_doubles_to_sum();
+    sum_doubles();
     if (number_of_doubles_to_sum != 1)
     {
         cout << "The sum of the first " << number_of_doubles_to_sum << " numbers in your series is " << sum_of_first_n_doubles << "." << endl
@@ -191,6 +192,7 @@ void accumulator::print_sum_doubles()
     
 }
 
+/**Calculate the sum of the values the user requested*/
 void accumulator::sum_doubles()
 {
     sum_of_first_n_doubles = 0;
@@ -200,8 +202,10 @@ void accumulator::sum_doubles()
     }
 }
 
+/**Ask the user which values they want summed*/
 void accumulator::get_number_of_doubles_to_sum()
 {
+    cout << endl << "Number of values in your series you would like to sum: ";
     while(true)
     {
         try
@@ -235,15 +239,20 @@ void accumulator::get_number_of_doubles_to_sum()
     }
 }
 
+/**Store the doubles entered by the user*/
 void accumulator::store_doubles()
 {
+    if (new_series == false)
+        return;
     input_termination = false;
+    cout << "Series:" << endl;
     while (input_termination == false)
     {
         check_series_input();
     }
 }
 
+/**Manage series input and terminate on cue*/
 void accumulator::check_series_input()
 {
     while (true)
@@ -277,30 +286,22 @@ void accumulator::check_series_input()
     }
 } 
 
-void accumulator::user_interface()
-{
-    print_instructions();
-    cout << "Series:" << endl;
-    while (calculate_again == true)
-    {
-        if (new_series == true)
-        {
-            store_doubles();
-        }
-        cout << endl << "Number of doubles to sum: ";
-        get_number_of_doubles_to_sum();
-        sum_doubles();
-        print_sum_doubles();
-        try_another_calculation();        
-    }
-    cout << endl << "Goodbye." << endl;
-}
-
+/**scaffolding for running the accumulator*/
 int main()
 {
     try
     {
-        instance.user_interface();
+        accumulator acc;
+        acc.print_instructions();
+
+        do
+        {
+            acc.store_doubles();
+            acc.print_sum_doubles();
+
+        } while (acc.should_try_again());
+        
+
     }
     catch (...)
     {
@@ -310,3 +311,13 @@ int main()
     return 0;
 }
 
+/*
+Calculator calc;
+
+do
+{
+    calc.read_input();
+    calc.perform_calculation();
+    calc.print_output();
+}
+while(calc.keep_running());*/
