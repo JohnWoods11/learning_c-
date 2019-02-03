@@ -1,0 +1,52 @@
+When i used 'extern int foo' in my.h for drill 1 the compiler returned:
+/tmp/ccsLal0z.o: In function `print_foo()':
+my.cpp:(.text+0x6): undefined reference to `foo'
+/tmp/ccdBqUsM.o: In function `main':
+use.cpp:(.text+0x6): undefined reference to `foo'
+collect2: error: ld returned 1 exit status
+
+When i tried to define foo by initialising it to 0 it returned:
+/tmp/ccSvB2hy.o:(.bss+0x0): multiple definition of `foo'
+/tmp/ccInmCm6.o:(.bss+0x0): first defined here
+collect2: error: ld returned 1 exit status
+
+Is this because both programs called my.h so it was defined twice?
+
+In the end I defined foo in my.cpp, I'm not sure if i was supposed to do this and am missreading the drill.
+
+______________________________________________________________________________________________
+
+int main()
+{
+    const int cx = 7;
+    const int cz = 9;
+    swap_r(cx,cz);
+    cout << cx << cz;
+}
+void swap_r(int& a, int& b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+Should the compiler only put out a warning? I thought this would be an error.
+
+________________________________________________________________________________________________
+
+In driil 3 I originally had main before the definitions of the namespaces and therefore it would not compile as the namespaces
+were being called before they were declared. So I wrote declarations at the top 'namespace X;' etc. This caused a huge amount of
+compile time errors so i moved main to under the definitions of the namespaces.
+
+_________________________________________________________________________________________________
+
+In exercise 3 they didn't stipulate the vector had to be a reference to a vector. It did need to be though right?
+
+___________________________________________________________________________________________________
+
+In exercise 4 i changed fibonacci to find the largest int in the fibonacci sequence, the book didn't say anything about changing the function
+therefore is there a different way you think i was expected to complete this exercise?
+
+____________________________________________________________________________________________________
+

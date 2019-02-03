@@ -1,0 +1,178 @@
+?? What is the differemce between a declaration and a definition?
+
+// A declaration is just the interface of the object being declared. which can be its name, type and parameter types. Whereas a definition os the
+// implementation of the object whether that is its value or a more complicated definition such as a function implementation etc.
+
+///////////////////////////////////////////////////////////////
+
+?? How do we syntactically distinguish between a function definition and a function declaration?
+
+// A function declaration requires the return type name and parameters of the function followed by a semi colon. A function definition doesn't
+// require the semi colon but an implementation between curly brackets (function body) to follow the return type name and parameters.
+
+ //////////////////////////////////////////////////////////////
+ 
+ ?? How do we syntactically distinguish between a variable declaration and a variable definition?
+
+ // Avariable declaration does not require the variable to be intialised whereas a variable definition must initialise the variable.
+
+ ///////////////////////////////////////////////////////////////
+
+?? Why can't you use the functions in the calculator program from chapter 6 without declaring them first?
+
+// Because the functions form a loop there will always be the case of a function calling another function before it has been defined
+// if you use function definitions only. Therefore a function declaration is required so that the compiler can know the function that
+// has been called is actually defined.
+
+///////////////////////////////////////////////////////////////
+
+?? Is int a; a definition or just a declaration.
+
+// It is just a declaration.
+
+//////////////////////////////////////////////////////////////////////
+
+?? Why is it a  good idea to initialize values as they are declared?
+
+// Helps people to understand the code.
+// Stops you from forgetting to initialise them later on and possibly ending up with junk values injected into your code.
+
+//////////////////////////////////////////////////////////////////////
+
+?? What can a function declaration consist of?
+
+// A return type, name and parameters. The parameters can be just their types or their types along with an identifier.
+
+////////////////////////////////////////////////////////////////////////
+
+?? What good does indentation do?
+
+// Makes code more readable, easier to digest, look nicer. Specifically makes nesting much easier to identify.
+
+///////////////////////////////////////////////////////////////////////
+
+?? What are header files used for?
+
+// For bringing other code into your code without the need to declare or define it seperately.
+
+//////////////////////////////////////////////////////////////////////////
+
+?? What is the scope of a declaration?
+
+// it depends where the declaration is declared, its scope is the scope in which it is declared.
+
+/////////////////////////////////////////////////////////////////////////////
+
+?? What kinds of scope are there? Give examples of each one.
+
+// Global scope - everywhere outside of any other scope
+// Local scope - local to the block it's declared in
+// Class scope - within a class 
+// namespace scope - a named scope nested in the global scope or in another namespace
+// Statement scope - scope inside a statement (eg for)
+
+/////////////////////////////////////////////////////////////////////////////
+
+?? What is the difference between a class scope and local scope
+
+// A class scope is the scope inside a class whereas the local scope is the scope inside a function 
+
+//////////////////////////////////////////////////////////////////////////////////
+
+?? Why should a program minimise the number of global variables?
+
+// Because theres no way of knowing which or how many of the functions have access to read or write into this variable 
+// it means theres a high chance the variable may not be what you expect it to be at any given time and if it isn't it will be 
+// very hard to find out why.
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+?? What is the difference between pass by value and pass by reeference?
+
+// Pass by value passes the value of a variable and therefore a copy of it whereas pass by reference passes a reference to the 
+// variable and therefore passes the variable itself.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+?? What is a swap()?
+
+// It swaps the values of its parameters with each other.
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+?? Would you ever define a function with a vector<double> by-value parameter?
+
+// No. Although if the size of the vector is small the added work of copying the vector won't be great, it will still be more than 
+// referencing the vector and as it's not a const vector<double> we couldn't guaruntee it would remain small anyhow.
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+?? Give an example of undefined order of evaluation. Why can undefined order of evaluation be a problem?
+
+// The order of initialisation of global variables in different translation units is undefined. Therefore if you used the same global 
+// variable across the translation units it can be initialised to different values depending on which translation unit is initialised 
+// first. This can depend on many things so you could even find it works fine on your system but not on others.
+
+/??////////////////////////////////////////////////////////////////////////////////////
+
+?? What do x&&y and x||y respectively mean?
+
+// x&&y means if x and y are true. 
+// x||y means if x or y are true.
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+?? which if the following is standard-conforming C++: functions within functions, functions within classes, classes within classes,
+?? classes within functions?
+
+// functions within functions, functions within classes.
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+?? What goes into an activation record?
+
+// A copy of a functions parameters and local variables along with the implementation stuff that the function needs to be able to 
+// {return to its caller and to return a value to its caller} (unsure of the distinction here).
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+?? What is a call stack and why do we need one?
+
+// The call stack is the activation records of functions that have beem called whilst they await a return. Because functions call other functions
+// we need the call stack to keep track of the order in which the functions should be evaluated. When a function calls another function that
+// function is placed on top of it in the stack and must return before the caller can then be evaluated and so on.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+?? What is the purpose of a namespace?
+
+// If you were to use names for your functions and variables that were intuitive there is a very high chance they have already been used by
+// by someone else and would clash. Namespaces solve this problem by allowing you to declare a namespace and declare your intuitive names
+// there meaning that anyone using your namespace will be able to call those functions or variables by name without worrying about them
+// clashing with other peoples definitions.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+?? How does a namespace differ from a class?
+
+A namespace does not define a type whereas a class does.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+?? What is a using declaration?
+
+// It declares that you are using a certain namespace and if a riable vafunction used is not declared in this scope to look in the namespace
+// provided for it.
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+?? Why should you avoid using directives in a header?
+
+// Because anyone who uses your header will then be using the namespace, perhaps unknowingly. Also you lose track of which names come from
+// where.
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+?? What is namespace std?
+
+// It is the namespace in which the facilities for the C++ standard library are stored.
