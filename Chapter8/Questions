@@ -16,6 +16,8 @@ In the end I defined foo in my.cpp, I'm not sure if i was supposed to do this an
 
 ______________________________________________________________________________________________
 
+int swap_r(int &a, int &b);
+
 int main()
 {
     const int cx = 7;

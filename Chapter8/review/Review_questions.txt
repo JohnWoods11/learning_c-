@@ -14,7 +14,7 @@
  
  ?? How do we syntactically distinguish between a variable declaration and a variable definition?
 
- // Avariable declaration does not require the variable to be intialised whereas a variable definition must initialise the variable.
+ //Extern = declaration, without is definition
 
  ///////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@
 
 ?? Is int a; a definition or just a declaration.
 
-// It is just a declaration.
+// It is just a definition
 
 //////////////////////////////////////////////////////////////////////
 
@@ -37,11 +37,33 @@
 // Helps people to understand the code.
 // Stops you from forgetting to initialise them later on and possibly ending up with junk values injected into your code.
 
+class Mine{ Mine(int x=42) : _x(x){}; int _x; };
+
+Mine a;
+Mine b(15);
+
 //////////////////////////////////////////////////////////////////////
 
 ?? What can a function declaration consist of?
 
 // A return type, name and parameters. The parameters can be just their types or their types along with an identifier.
+
+func.h
+/** Docs for func */
+int func(int a, int b, int c=20);
+
+file1.cpp
+include func.h
+
+file2.cpp
+include func.h
+
+func.cpp
+/** Docs for func */
+int func(int a, int b, int c)
+{
+
+}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -65,17 +87,59 @@
 
 ?? What kinds of scope are there? Give examples of each one.
 
-// Global scope - everywhere outside of any other scope
+// File scope - everywhere outside of any other scope
 // Local scope - local to the block it's declared in
 // Class scope - within a class 
 // namespace scope - a named scope nested in the global scope or in another namespace
 // Statement scope - scope inside a statement (eg for)
+
+int a;
+
+{ int b; { int c; { int d; }}}
 
 /////////////////////////////////////////////////////////////////////////////
 
 ?? What is the difference between a class scope and local scope
 
 // A class scope is the scope inside a class whereas the local scope is the scope inside a function 
+
+class A
+{
+public:
+   A(int x=10);
+
+   int plus(const A &other) const;
+
+   void add(const A &other);
+
+private:
+   int _x;
+};
+
+A::A(int x)
+{
+    this->_x = x;
+}
+
+int A::plus(const A &other) const
+{
+    return this->_x + other._x;
+}
+
+void A::add(const A &other)
+{
+    this->_x += other._x;
+}
+
+A one(1);
+A two(2);
+
+std::cout << one.plus(two) << std::endl;
+
+one.add(two);
+
+const A three(3);
+three.add(two);  //ERROR
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -97,6 +161,8 @@
 ?? What is a swap()?
 
 // It swaps the values of its parameters with each other.
+
+if (a > b){ std::swap(a,b); }
 
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,12 +186,26 @@
 // x&&y means if x and y are true. 
 // x||y means if x or y are true.
 
+x and y   x or y
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 ?? which if the following is standard-conforming C++: functions within functions, functions within classes, classes within classes,
 ?? classes within functions?
 
 // functions within functions, functions within classes.
+
+template<class T>
+auto func(T something)
+{
+    auto func2 = [=](int a){std::cout << "HELLO" << something << a;};
+
+    return func2;
+}
+
+auto new_func = func(std::vector<int>({1,2,3}));
+
+new_func(10);
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -151,6 +231,28 @@
 // there meaning that anyone using your namespace will be able to call those functions or variables by name without worrying about them
 // clashing with other peoples definitions.
 
+namespace MyPackage
+{
+    namespace Core{ ... }
+    namespace Graphics{ ... }
+    namespace Game{
+        namespace Characters{ class Troll{}; }
+        namespace Levels{ class Level1(); class Level2(); }
+    }
+}
+
+class Level{ Level(); void add(Characters::Troll troll); }
+
+MyPackage::Game::Characters::Troll fred("Fred");
+MyPacakge::Game::Characters::Hero james("James");
+
+MyPackage::Game::Levels::Level1 level;
+
+level.add(fred);
+level.add(james);
+level.play();
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 ?? How does a namespace differ from a class?
@@ -163,6 +265,33 @@ A namespace does not define a type whereas a class does.
 
 // It declares that you are using a certain namespace and if a riable vafunction used is not declared in this scope to look in the namespace
 // provided for it.
+
+troll.h
+
+namespace MyPacakge
+{
+namespace Game
+{
+namespace Characters
+{
+    class Hero;
+
+    class Troll
+    {
+    public:
+        Troll();
+        void fight(Hero hero);  
+    };
+    
+} // end of namespce Characters
+} // end of namespace Game
+} // end of namespace MyPackage
+
+troll.cpp
+using MyPackage::Game::Characters::Hero;
+
+void Troll::fight(Hero hero){ };
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

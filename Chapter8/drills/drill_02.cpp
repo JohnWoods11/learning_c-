@@ -29,6 +29,8 @@ void swap_cr(const int& a, const int& b)
 
 int main()
 {
-
-
+    const int cx = 7;
+    const int cz = 9;
+    swap_r(cx,cz);
+    cout << cx << cz;
 }

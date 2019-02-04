@@ -13,7 +13,7 @@ void fibonacci (int x, int y, vector<int>& v, int n)
     while (v.size() <= n)
     {
         v.push_back(v[v.size()-1] + v[v.size()-2]);
-        if (v[v.size()-1] < 0)
+        if (v[v.size()-1] < v[v.size()-2])
             {
                 cout << v[v.size()-2] << " - Largest fibonacci number to fit in an int." << endl;
                 break; 
@@ -21,8 +21,12 @@ void fibonacci (int x, int y, vector<int>& v, int n)
     }
 }
 
+#include <limits>
+
 int main()
 {
+    auto s = std::numeric_limits<int>::max();
+
     try
     {
         vector<int> empty;
