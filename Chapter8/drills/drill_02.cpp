@@ -31,6 +31,6 @@ int main()
 {
     const int cx = 7;
     const int cz = 9;
-    swap_r(cx,cz);
+    swap_v(cx,cz);
     cout << cx << cz;
 }
