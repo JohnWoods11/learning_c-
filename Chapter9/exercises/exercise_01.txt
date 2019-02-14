@@ -1,0 +1,25 @@
+List sets of plausible operations for the examples of real world objects in 9.1.
+
+Toaster
+- set_timer()
+- start_toasting()
+    - start_timer()
+- count_timer()
+- stop_toasting()
+
+
+Music player
+- show_songs()
+- choose_song()
+- play()
+- pause()
+- stop()
+- next()
+- previous()
+- delete_song()
+
+
+Coffee cup
+- 
+
+

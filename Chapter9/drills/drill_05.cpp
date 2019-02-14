@@ -92,7 +92,22 @@ void f()
     today.add_year(10);
     cout << today.day() << " " << today.months[int(today.month()) + 1] << " " << today.year().year() << endl;
 }
- 
+/*
+Day, Month, Year
+
+Date = Day + Month, Month + Day, Date + Year, Month + Year, 
+
+f = Month("February");
+d = Day(29);
+y = Year(2004);
+
+d = Date(Year(2004), Month("February"), Day(29));
+
+TimeDelta = Date - Date
+
+TimeDelta.hours(), .days(), 
+*/
+
 int main()
 {
     try

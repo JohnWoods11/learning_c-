@@ -11,6 +11,14 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+implicitly an invariant - explicit is better than implicit - assertSane should check invariant is maintained
+If the invariant is not maintained then we must ve in an invalid state - identify invalid states as quickly as 
+possible to minimise the blast radius of bugs. Ideally all constructors should validate the invariant is true
+at the end of construction (always construct objects in a valid state), also all member functions that change the
+state of the obejcts (i.e. all non-const member functions) should validate that the invariant is maintained
+(i.e. the change of state is valid). Best way to do this is crate a singe function called "assertSane" that you 
+call that checks invariants are maintained and raises an exception if they are not (PROGRAM BUG)
+
 ?? What are the problems of the original Date struct that is created in the chapter?
 
 // The members of the struct are public so users can directly change the data members without using the helper functions which could lead
@@ -34,6 +42,19 @@
 
 ?? When should functions be put in the class definition and when should they be defined outside the class? Why?
 
+**NEVER** declare functions in the class definition. 
+
+
+/// file.h
+class A{ int one(); int two(); };
+
+ifdef INCLUDE_INLINE
+inline int A::one(){ return 1;} 
+endif
+
+/// file.cpp
+int A::two(){ return 2;} 
+
 // Only when the function is one or two lines should it be defined in the class definition. Else they should be defined outside the class.
 // The reason for defining the one or two line functions within the class definition is because it can be a performance advantage. 
 // For larger classes the performance advantage is negligible and they are not included in the class definition so that the class
@@ -46,6 +67,35 @@
 // When you want to define the c++ operators for your own types. This means users can then use these conventionl operators with your types making them
 // much moreintuitvie. you can overload binary + and - so that you can add and subtract your types from each other. == and != can be defined to test 
 // if your types have the same value or not.
+
+FooBase: 
+BarBase;
+
+CBase operator+(FooBase, BarBase){ return CBase };
+
+C operator+(Foo, BarBase){ return C();}
+
+C operaotr+(Foo, Bar){ reutnr C();}
+class Foo{ C operator+(const BarBase &){ retunr C;}
+           bool operator==(const Foo &other) const{ ....}
+           bool operator!=(const Foo &other){ return not this->operator==(other);}
+           bool operator<(const Foo &other){ .... }
+           bool operator>(const Foo &other){ return not (this->operaoor<(other) or this->operator==(other));}
+           bool operator>=(  not < )
+           bool operaotr<=( not > )
+}
+
+class Bar( C operator+(const FooBase &foo){ return foo.operator+(*this);})
+
+SINGLE SOURCE OF TRUTH - ONLY IMLEMENT SOMETHING ONCE
+
+
+
+Foo a;
+Bar b;
+
+auto c = a + b;
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -62,9 +112,48 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
+m = Molecule();
+
+auto new_m = m.edit().rename("NEW").commit();
+
+Data = (Model)
+Read =(View)
+Edit = (Controlling)
+
+
+MVC = model view controller
+
+auto new_m = m.move().translate( Vector(1,1,1) ).commit()
+
+
+3 pillar of OO programming
+
+1. Encapsulation - private data and functions are not accessible outside the class
+2. Inheritance - one class can iherti the properties and functions of another class
+3. Abstraction - functioanlity can be abstracted into defined types - hide things that are uneeded behind an interface
+
+
 ?? Why are helper functions best place outside the class definition? 
 
 // Because if a function can be implemennted simply and eficiently outside of the class then it shouldn't be in the class. This is because it 
 // therefore won't be able to directly corrupt the member data. This means when the member data has been directly corrupted there are less
 // suspects and debugging is easier. Also it simplifies the the interface of the class for the user.
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+sort = sorts a container using a comparison operator
+
+concept = the abstract idea of something - any class that implements functions that match teh concept are conceptually the same
+
+container = length, get, set, count, is_empty, 
+
+sort( container c){ for item in container, check i, i+1, if  i < i+1 swap }
+
+concrete - 
+
+template<class CONTAINER>
+CONTAINER sort(CONTAINER c)
+{
+    ///
+    if (c.length(){ .... })
+    return c;
+}
