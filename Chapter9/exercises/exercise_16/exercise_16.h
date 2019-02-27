@@ -8,6 +8,8 @@ enum class Currency
     USD = 0, DSK = 1, GBP = 2, JPY = 3
 };
 
+std::string currency_to_string(Currency c);
+Currency string_to_currency(const std::string &s);
 
 class Money
 {
@@ -22,8 +24,11 @@ public:
     long int fractionalDenominator() const;
     Currency currency() const;
 
-    bool assertSameCurrency(const Money &other) const;
-    bool assertSane() const;
+    bool isSane() const;
+    bool isSameCurrency() const;
+
+    void assertSameCurrency(const Money &other) const;
+    void assertSane() const;
 
     Money operator+(const Money&);
     Money operator-(const Money&);  

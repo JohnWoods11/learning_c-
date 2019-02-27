@@ -1,0 +1,4 @@
+
+?? Give an example of a calculation where a rational gives a mathmatically better result than a double.
+
+// 

@@ -22,7 +22,7 @@ public:
     long int fractionalDenominator() const;
     Currency currency() const;
 
-    bool assertSameCurrency(const Money &other) const;
+    void assertSameCurrency(const Money &other) const;
     bool assertSane() const;
 
     Money operator+(const Money&);

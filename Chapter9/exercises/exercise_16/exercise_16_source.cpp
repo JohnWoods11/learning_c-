@@ -104,16 +104,37 @@ Money Money::operator*(const double d)
     return m;   
 }
 
+string currency_to_string(Currency c)
+{
+    switch(c)
+    {
+    case Currency::USD:
+        return "USD";
+    case Currency::DSK:
+        return "DSK";
+    case Currency::GBP:
+        return "GBP";
+    case Currency::JPY:
+        return "JPY";
+    default:
+        throw invalid_argument("Unknown currency");
+    }
+
+    return std::string();
+}
+
+Currency string_to_currency(const std::string &s)
+{
+    static const std::map<std::string, Currency> m = { {"USD", Currency::USD}, 
+                                                       {"DSK", Currency::DSK} };
+
+    return m.at(s);
+}
 
 /** Money output operator*/
 ostream& operator<<(ostream& out, const Money &m)
 {
-    map<int, string> CurrencyName;                           // Why can't i initialise this globaly?
-    CurrencyName[0] = "USD";
-    CurrencyName[1] = "DSK";
-    CurrencyName[2] = "GBP";
-    CurrencyName[3] = "JPY";
-    out << CurrencyName.at(int(m.currency())) << m.standardDenominator() << ".";
+    out << currency_to_string(m.currency()) << m.standardDenominator() << ".";
     // force print empty dec value of fractionalDenominator
     if (m.fractionalDenominator() < 10)
     {
@@ -176,12 +197,18 @@ istream& operator>>(istream& in, Currency &c)
 }
 
 
+
+class my_exception : public std::runtime_error
+{
+public:
+    my_exception(const char *message) throw() : std::runtime_error(message) {}
+};
+
+
 /** Asserts same currency is being useed*/
-bool Money::assertSameCurrency(const Money &other) const                                    // should this be void and just return instead of
+void Money::assertSameCurrency(const Money &other) const                                    // should this be void and just return instead of
 {                                                                                           // retuning true?
-    if (this->_currency == other._currency)
-    {
-        return true;
-    }
-    throw invalid_argument("Can not operate using two different currencys.");
+    if (this->_currency != other._currency)
+        throw my_exception("Can not operate using two different currencys.");
 }
+
