@@ -1,0 +1,128 @@
+?? Why is I/O tricky for a programmer?
+
+// Because I/O is not fully standardized, input can come in many forms and formats which makes dealing with it more difficult,
+// output is less tricky but is complicated by the need to output data in a useable format which must be defined.
+////////////////////////////////////////////////////////////
+
+
+?? What does the notation << hex do?
+
+// Changes the output stream so that it will output numbers in the hexadecimal base. This will remaain the case until it is explicitly
+// told to represent a different base.
+///////////////////////////////////////////////////////////////
+
+
+?? What are hexadecimal numbers used for in computer science? why?
+
+// To represent hardware related information. 
+// Because a hexadecimal number represents 4 bits, 2 of them can be used to represent the value of 8 bits (1 byte). Making reading and writing
+// hardware memory values easier.
+///////////////////////////////////////////////////////
+
+?? Name some of the options you may want to implement for formating integer output.
+
+// setw()
+// oct
+// dec
+// hex
+// showbase
+///////////////////////////////////////////////////
+
+
+?? What is a manipulator?
+
+// It is a command used in i/o streams to change the way in which data is/can-be input or output.
+////////////////////////////////////////////////
+
+
+?? What is the prefix for decimal? For octal? For hexadecimal?
+
+// decimal - none
+// octal - 0
+// hexadecimal - 0x
+////////////////////////////////////////////////
+
+
+?? What is the default output format for floating-point values?
+
+// the default float format prints a float using 6 total digits and uses scientific or fixed depending on which is a 
+// better choice for the float.
+//////////////////////////////////////////////////
+
+
+?? What is a field?
+
+// A field is a way of controlling the number of character spaces used to output a value (just integers?).
+//////////////////////////////////////////////
+
+
+?? Explain what setprecision() and setw() do.
+
+// setprecision() sets to what precision (how many numbers) a float will be output to rounding any numbers that are outside
+// the precision specified. setprecision() does not stick? 
+// setw() sets the number of character spaces to be used to output an int. If setw() is less than the number of digits of the int the 
+// int will ignore setw() and use the required amount of spaces. setw() does not stick.
+//////////////////////////////////////////////
+
+
+?? What is the purpose of file open modes?
+
+// so different tasks can be carried out easily and in some cases without the ability to carry out unwanted tasks. For instance opening a 
+// file as read only means the file can not be altered inadvertantly and adding to a log can be done easilywith the append mode.
+///////////////////////////////////////////
+
+
+?? Which of the following manipulators does not stick : hex, scientific, setprecision(), showbase, setw()?
+
+// setw()
+
+// setprecision()??
+///////////////////////////////////////////////
+
+
+?? What is the difference between character I/O and binary I/O?
+
+// binary I/O deals with data in specified sizes of memory, whether that size is the size of an int or some other type. Character I/O
+// deals with charcters and its data is dealt with as a character or a series of characters (a string).
+///////////////////////////////////////////////
+
+
+?? Give an example of when it would probably be beneficial to use a binary file instead of a text file.
+
+// When dealing with a large amount of integer it would be beneficial to use a binary file as all integers would take up four bytes as opposed 
+// as many bytes as digits and the overhead for using a string. 
+///////////////////////////////////////////////////
+
+
+?? Give two examples when a string stream can be useful.
+
+// converting a string into a double or another type.
+// tailoring I/O to specific formats.
+////////////////////////////////////////////////////
+
+
+?? What is file postion?
+
+// a location within a file. for example when reading or writing in character I/O you read from a certain character (its position) 
+// e.g char[0] - begining, char[5] - the sixth char or char[file size - 1] - end.
+/////////////////////////////////////////////////////
+
+
+?? What happens if you position a file position beyond the end of the file?
+
+// What happens is undefined and depends on the operating system.
+///////////////////////////////////////////////////
+
+
+?? When would you prefer line oriented input as opposed to type input? 
+
+// When dealing with user input as lines rather than as seperate words. 
+/////////////////////////////////////////////////////
+
+
+?? What does isalnum(c) do?
+
+// does not compile unless c is a char variable or pointer to one. If c is then it will return true if c is a alphanumeric character or 
+// false if it is not.
+///////////////////////////////////////////////////////
+

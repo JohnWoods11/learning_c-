@@ -1,0 +1,133 @@
+
+
+?? When dealing with input and output, how is the variety of devices dealt with in most modern computers?
+
+// By using device drivers that standardize the input output of individual devices so they may use the same input output libraries making
+// input and output from these devices appear very similar.
+/////////////////////////////////////////////////////////////////////
+
+
+?? What, fundamentally, does an istream do?
+
+// Creates a buffer that stores input so that it can then be accesed and used by the user.
+////////////////////////////////////////////////////////////////
+
+
+?? What, fundamentally does an ostream do?
+
+// Creates a buffer that stores data which can then be output by the user.
+/////////////////////////////////////////////////////////////////
+
+
+?? What, fundamentally is a file?
+
+// A sequence of bytes that conforms to a formating rule which allows it to store data.
+//////////////////////////////////////////////////////////////////
+
+
+?? What is a file format?
+
+// It is the way in which data must be represented (in bytes?) for it to be useable.
+//////////////////////////////////////////////////////////////////
+
+
+?? Name four different types of device that can require I/O for a program.
+
+// Thermostat, input - temp reading, output - heating commands
+// Monitor, input - user commands (on, off, settings), output - display
+// Streetlights, input - solar sensor reading, output - lighting commands
+// Thrust vectoring, input - gyro sensor, speed sensor etc., output - nozzle commands
+//////////////////////////////////////////////////////////////////////
+
+
+?? What are the four steps of reading a file? 
+
+// Know the name of the file
+// Open file
+// Seek to start point
+// Read file
+// Close file
+///////////////////////////////////////////////////////////////////////
+
+
+?? What are the four steps for writing a file?
+
+// Name file
+// Open file
+// Seek to start point
+// Write to file
+// Close file
+//////////////////////////////////////////////////////////////////////////
+
+
+?? Name and define the four stream states.
+
+// (good) - the stream is succesful in doing what it is commanded to
+// (eof) - the stream has reached the end of the file
+// (fail) - the stream has encountered an error that can be recovered from
+// (bad) - the stream has encountered an error that can not be recovered from
+///////////////////////////////////////////////////////////////////////////////
+
+
+?? Discuss how the following input problems can be resolved.
+    ?? The user typing an out of range value?
+
+    // Can be resolved localy by promting the user that their input was invalid, remind them the invariant and to try again.
+    ////////////////////////////////////
+
+    
+    ?? Getting no value (end of file)
+
+    // Can be resolved by throwing an exception exclaiming that there was no input and recovering somewhere else in the program, unless no input
+    // was required in which case you would just carry on. 
+    //////////////////////////////////////
+
+
+    ?? The user typing something of the wrong type?
+
+    // Can be resolved by throwing an exception and either recovering somewhere else in the program or terminating the program. 
+    ///////////////////////////////////////
+////////////////////////////////////////////////////
+
+
+?? In what way is input usually harder than output?
+
+// Errors are much more likely in input compared to output therefore there is much more accounting for errors when dealing with input.
+// In this way input is usualy harder than output. Users cannot be trusted - errors from input can be exploited to crack your program
+///////////////////////////////////////////////////
+
+ 
+
+?? In what way is output usually harder than input?
+
+// Deciding how to represent your data is much harder with regards to output. Generally with input you will have already your data and the way in 
+// which it is represented will be just that. With output you must take into account the users needs aswell as readability among other things such
+// as seperating dialog from function.
+
+Escaping a string means \n, \\n \\\\n
+
+/////////////////////////////////////////////////////
+
+
+
+?? Why do we (often) want to seperate input and output from computation?
+
+// Because input and output will not be standardized or suitable for the wide range of use cases a program may have. By seperating the input/output
+// from computation you allow the computation part of the program to be used easily with other input or output methods.
+/////////////////////////////////////////////////////////
+
+
+?? What are the two most common uses of the istream member function clear()
+
+// To reset the istream after a eof, bad or fail state (back to good). (no arguments)
+// To set the istream to a selected state. (state argument)
+///////////////////////////////////////////////////////////////
+
+
+?? What are the usual function declarartions for << and >> for a user defined type X?
+
+// ostream& operator<<(ostream &out, const X &x);
+// istream& operator>>(istream &in, X &x);
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+

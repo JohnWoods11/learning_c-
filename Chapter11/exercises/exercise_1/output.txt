@@ -1,0 +1,1 @@
+thisistheuppercaseinputfile.*/1234itshouldbecomelowercase!"£$%%233

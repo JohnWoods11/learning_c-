@@ -1,0 +1,7 @@
+this file is going to contain three instances of the word compute
+no instances will be on the second line
+one instance will be on the third line compute
+none on the fourth
+or the fifth
+compute
+that is them all

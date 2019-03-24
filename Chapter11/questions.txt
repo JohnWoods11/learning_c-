@@ -1,0 +1,22 @@
+exercise 2
+
+is there anything wrong with concatenating like i did with cout in this exercise?
+
+should i use a for loop while parsing through ist like i did with the lineContains function?
+
+
+exercise 3
+
+is there any way to remove the vowels without having to overwrite the whole file?
+
+
+exercise 4
+
+my output is right alligned whereas the original base in the book is left alligned, have they just used tabs to do that?
+
+
+exercise 5
+
+can i use a switch statement as opposed to the if statements in this exercise or is there another better way?
+
+
