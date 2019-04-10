@@ -1,0 +1,179 @@
+?? Why don't we "just" use a commercial or open source graphics directly?
+
+// Because they are more powerful than required and use implementations that are beyond the scope of this course.
+////////////////////////////////////////////
+
+
+?? About how many classes from our graphics library do you need to do simple graphics output?
+
+// 5
+// Point, Line, Color, Line_style?, Simple_window
+////////////////////////////////////////////
+
+
+?? What are the header files needed to use the graphics interface library?
+
+// Graph.h
+// Simple_window.h
+// Window.h
+// GUI.h
+//
+// in Graph.h:
+// Stdlibfacilities.h
+// Point.h
+////////////////////////////////////////////
+
+
+?? What classes define closed shapes?
+
+// Closed_polyline
+// Polygon
+////////////////////////////////////////////
+
+
+?? Why don't we just ude Line for every shape?
+
+// Because shapes have rules in their construction if we don't account for these rules we cannot guaruntee that the lines drawn are 
+// infact the shape they are intended to be. Therefore we need to create a different class that will incorporate these rules into the construction
+// of each shape.
+////////////////////////////////////////////
+
+
+?? What do the arguments to Point indicate?
+
+// The lateral and vertical position of the Point in relation to the top left corner of the object it is being placed on.
+//////////////////////////////////////////////
+
+
+?? What are the components of line style?
+
+// width and type
+//////////////////////////////////////////////
+
+
+?? What are the components of color?
+
+// color and visibility
+////////////////////////////////////////////
+
+
+?? What is RGB?
+
+// The red, green, blue color scale.
+/////////////////////////////////////////////
+
+
+?? What are these differences between two Line s and a Lines containing two Line s?
+
+// The two Line s are seperate objects which can be referenced and their member functions can be used independently just by referencing the Line
+// objects. The Lines object groups the Line s together so that its member functions will affect both of the lines and to access the Line s 
+// independently you must first reference the Lines object and then the Line s position in it.
+////////////////////////////////////////////
+
+
+?? What properties can you set for every shape?
+
+// Color
+// Point
+// Line_style
+
+// Was there an easy way to find this out? I just guessed.
+//////////////////////////////////////////////////
+
+
+?? How many sides does a closed polyline defined by five points have?
+
+// 5 or more (depends if any lines cross)
+///////////////////////////////////////////////////
+
+
+?? What do you see if you define a shape but don't attatch it to a window?
+
+// Nothing - just a window if you defined the window. and called Window::waitforbutton().
+///////////////////////////////////////////////////
+
+
+?? How does a Rectangle differ from a polygon with four points (corners)?
+
+// each angle must be 90 degrees, opposite sides must be the same length.
+
+// point[1] == point[0] + width
+// point[2] == point[1] + height
+// point[3] == point[2] - width
+/////////////////////////////////////////////////////////
+
+
+?? How does a polygon differ from a closed polyline? 
+
+// Lines of a polgon can not cross each other.
+///////////////////////////////////////////////////////
+
+
+?? Whats on top fill or outline?
+
+// outline
+/////////////////////////////////////
+
+
+?? Why didn't we bother defining a triangle class (after all we did design rectangle)?
+
+// Because any polygon made with 3 points is a triangle therefore a triangle class is not strictly needed, even though it could be useful 
+// im certain situations.
+/////////////////////////////////////////////////////
+
+
+?? How do you move a Shape to another place in a window?
+
+// Shape::move()
+//////////////////////////////////////////
+
+
+?? How do you label a Shape with a line of text?
+
+// placing a text struct near it and using set_label()
+/////////////////////////////////////////
+
+
+?? What properties can you set for a text string in a Text?
+
+// Font
+// Color - through shape?
+// Size
+// Location - would you count this as a property?
+/////////////////////////////////////
+
+
+?? What is a font and why do we care?
+
+// Its a writing style. We care because users care.
+////////////////////////////////////// 
+
+
+?? What is a Vector_ref and how do we use it?
+
+// It is a vector that stores a (shape only?) object or a pointer to a (Shape only?) object so that it may be referenced later (and deleted once out
+// of scope?). Theoretically we use it the same way as a Vector except when adding an unamed object we must use new (to allocate a memory address
+// to the object and store it in the Vector_ref as a pointer?) 
+
+// Theoretically because the copy constructor doesn't seem to work for Shape objects so I can only use pointers to Shapes
+//////////////////////////////////////////
+
+
+?? What is the difference betwee circle and ellipse?
+
+// A circles radius remains the same throughout the arc whereas the ellipses will change.
+
+//?? Is this question asking for implementation differences or will this answer do?
+/////////////////////////////////////////////////////////
+
+
+?? What happens if you try to display an image given a filename thatdoesn't refer to a file containing an image?
+
+// a Bad_Image is displayed.
+///////////////////////////////////////////////////////
+
+
+?? How do you display a part of an image? 
+
+// Use Image::set_mask() and declare the part of the image you would like to display.
+/////////////////////////////////////////////////////
