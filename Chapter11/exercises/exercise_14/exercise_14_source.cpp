@@ -7,6 +7,9 @@ void countCharClassifications(string &filename)
     int space = 0, alpha = 0, digit = 0, xdigit = 0, upper = 0, lower = 0, alnum = 0, cntrl = 0, punct = 0, print = 0, graph = 0;
     for (char character; ifst.get(character); )
     {
+        space += isspace(character) ? 2 : 1;
+        alpha += isalpha(character);
+
         if (isspace(character))
         {
             space++;

@@ -28,10 +28,12 @@ void reverseFileText(string &filename)
 
 void reverseText(string &text)
 {
-    string reversed_string;
+    string reversed_string = text;
+    int j = 0;
     for (int i = text.size()-1 ; i >= 0 ; i--)
     {
-        reversed_string += text[i];
+        reversed_string[j] = text[i];
+        j++;
     }
     text = reversed_string;
 }

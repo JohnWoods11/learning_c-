@@ -49,3 +49,5 @@ int convertToDec(const string &integer, string &type)
     }
     return dec_number;
 }
+
+

@@ -14,7 +14,7 @@ void linesContaining(string filename, string text)
         getline(ist, line);
         if (lineContains(line, text))
         {
-            cout << "line nuber " << line_number << "\t" + line + "\n";
+            cout << "line nuber " << line_number << "\t" << line << "\n";
         }
     }
     cout << "End of file reached,\n";
@@ -24,12 +24,13 @@ void linesContaining(string filename, string text)
 bool lineContains(string line, string text)
 {
     stringstream ss(line);
-    for (string s; ss >> s; )
+
+    while (ss)
     {
-        if (s == text)
-        {
-            return true;
-        }
+        string s;
+        ss >> s;
+        if (s == text) return true;
     }
+
     return false;
 }

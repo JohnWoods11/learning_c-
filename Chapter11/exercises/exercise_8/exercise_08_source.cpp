@@ -13,6 +13,8 @@ void toLowerString(string &text)
     text = new_text;
 }
 
+// for (auto & c: str) c = toupper(c);
+
 /** Replaces non words with whitespace characters with whitespace*/
 void removeNonWords(string &text)
 {
