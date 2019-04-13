@@ -475,23 +475,23 @@ void Box::draw_lines() const
         **/
        
        // Draw top line
-       fl_line(point(0).x + w / round_fac, point(0).y, point(1).x - w / round_fac, point(1).y);
+       fl_line(point(0).x + w / round_factor, point(0).y, point(1).x - w / round_factor, point(1).y);
        // Draw botom line
-       fl_line(point(3).x + w / round_fac, point(3).y, point(2).x - w / round_fac, point(2).y);
+       fl_line(point(3).x + w / round_factor, point(3).y, point(2).x - w / round_factor, point(2).y);
        // Draw left line
-       fl_line(point(0).x, point(0).y + h / round_fac, point(3).x, point(3).y - h / round_fac);
+       fl_line(point(0).x, point(0).y + h / round_factor, point(3).x, point(3).y - h / round_factor);
        // Drawright line
-       fl_line(point(1).x, point(1).y + h / round_fac, point(2).x, point(2).y - h / round_fac);
+       fl_line(point(1).x, point(1).y + h / round_factor, point(2).x, point(2).y - h / round_factor);
 
 
        // Draw NW corner
-       fl_arc(point(0).x, point(0).y, w / round_fac * 2, h / round_fac * 2, 90, 180);
+       fl_arc(point(0).x, point(0).y, w / round_factor * 2, h / round_factor * 2, 90, 180);
        // Draw NE corner
-       fl_arc(point(1).x - w / round_fac * 2, point(1).y, w / round_fac * 2, h / round_fac * 2, 0, 90);
+       fl_arc(point(1).x - w / round_factor * 2, point(1).y, w / round_factor * 2, h / round_factor * 2, 0, 90);
        // Draw SE corner
-       fl_arc(point(2).x - w / round_fac * 2, point(2).y - h / round_fac * 2, w / round_fac * 2, h / round_fac * 2, 270, 360);
+       fl_arc(point(2).x - w / round_factor * 2, point(2).y - h / round_factor * 2, w / round_factor * 2, h / round_factor * 2, 270, 360);
        // Draw SW corner
-       fl_arc(point(3).x, point(3).y - h / round_fac * 2, w / round_fac * 2, h / round_fac * 2, 180, 270);
+       fl_arc(point(3).x, point(3).y - h / round_factor * 2, w / round_factor * 2, h / round_factor * 2, 180, 270);
 
     }
 }
@@ -513,6 +513,12 @@ void Arrow::draw_lines() const
 
 
 //-----------------------------------------------------------------------------------------
+
+void Textbox::draw_lines() const
+{
+    b.draw_lines();
+    t.draw_lines();
+}
 
 
 } // of namespace Graph_lib

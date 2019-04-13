@@ -242,7 +242,33 @@ struct Lines : Shape {                 // related lines
 
 struct Text : Shape {
     // the point is the bottom left of the first letter
-    Text(Point x, const string& s) : lab(s), fnt(fl_font()), fnt_sz(fl_size()) { add(x); }
+    Text()
+        :lab("blank"), fnt(fl_font()), fnt_sz(fl_size())
+    {
+        if (fnt_sz < 14)
+        {
+            fnt_sz = 14;
+        }
+    }
+
+    Text(Point x, const string& s) : lab(s), fnt(fl_font()), fnt_sz(fl_size()) 
+    { 
+        add(x); 
+        if (fnt_sz < 14)
+        {
+            fnt_sz = 14;
+        }
+    }
+
+    Text(const Text &other)
+        :lab(other.lab), fnt(other.fnt), fnt_sz(other.fnt_sz)
+    {
+        add(other.point(0));
+        if (fnt_sz < 14)
+        {
+            fnt_sz = 14;
+        }
+    }
 
     void draw_lines() const;
 
@@ -401,8 +427,11 @@ private:
 
 struct Box : Shape
 {
+    Box()
+        :w(50), h(20), round_factor(5)
+        {}
     Box(Point xy, int ww, int hh, int rf)
-        :w(ww), h(hh), round_fac(rf)
+        :w(ww), h(hh), round_factor(rf)
     {
         add(xy);
         if (hh<=0 || ww<=0) error("Bad box: non-positive side");
@@ -411,16 +440,32 @@ struct Box : Shape
         add(Point(xy.x , xy.y + h));
     }
 
+    Box(const Box &other)
+        :w(other.w), h(other.h), round_factor(other.round_factor)
+    {
+        add(other.point(0));
+        if (h<=0 || w<=0) error("Bad box: non-positive side");
+        add(Point(other.point(0).x + w, other.point(0).y));
+        add(Point(other.point(0).x + w, other.point(0).y + h));
+        add(Point(other.point(0).x , other.point(0).y + h));
+    }
+
+    ~Box()
+    {}
 
     void draw_lines() const;
 
     int width() const {return w;}
     int height() const {return h;}
+    int round_fac() const {return round_factor;}
+    void set_width(int ww) {w = ww;}
+    void set_height(int hh) {h = hh;}
+    void set_round_fac(int rf) {round_factor = rf;}
 
     private:
     int w;
     int h;
-    int round_fac;
+    int round_factor;
 
 }; 
 
@@ -436,6 +481,25 @@ struct Arrow : Shape
     void draw_lines() const;
 };
 
+struct Textbox : Box
+{
+    Textbox()
+        :b(Box()), t(Text())
+    {}
+    Textbox(const Box &bb, const string &tt)
+        :b(bb), t(Text(Point(bb.point(3).x + 5, bb.point(3).y - 5), tt))
+    {}
+
+    void draw_lines() const;
+    void set_fill_color(Color c)
+    {
+        b.set_fill_color(c);
+    }
+
+    private:
+    Text t;
+    Box b;
+};
 
 } // of namespace Graph_lib
 
