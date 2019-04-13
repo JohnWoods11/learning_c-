@@ -1,0 +1,8 @@
+Exercise 1:
+
+I originally made a directory and put Arc.h and Arc.cpp into it. I linked them in Arc.h to Graph.h, Simple_window.h,
+stdlibfacilities.h. Had the same exercise_1.cpp except it linked to Arc.h, same implementations yet when i tried make it said it could
+not find the vtable for Arc. I copy pasted the contents of Arc.h to Graph.h and Arc.cpp to Graph.cpp and it worked. What was going on here? 
+
+To begin with i tried inheriting from Ellipse but I could not make a Arc constructor because there was "no default constructor for Ellipse"
+could you explain this?
