@@ -493,6 +493,7 @@ void Box::draw_lines() const
        // Draw SW corner
        fl_arc(point(3).x, point(3).y - h / round_factor * 2, w / round_factor * 2, h / round_factor * 2, 180, 270);
 
+    
     }
 }
 
@@ -520,6 +521,13 @@ void Textbox::draw_lines() const
     t.draw_lines();
 }
 
+//------------------------------------------------------------------------------------------
+
+void Hexagon::draw_lines() const
+{
+   
+    Polygon::draw_lines();
+}
 
 } // of namespace Graph_lib
 

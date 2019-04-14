@@ -469,7 +469,6 @@ struct Box : Shape
 
 }; 
 
-
 struct Arrow : Shape
 {
     Arrow(Point p1, Point p2)
@@ -499,6 +498,29 @@ struct Textbox : Box
     private:
     Text t;
     Box b;
+};
+
+
+struct Hexagon : Polygon
+{
+    Hexagon()
+    {}
+    
+    Hexagon(Point c, int hw)
+        :half_width(hw), centre(c)
+    {
+         for (int i = 0; i < 360 ; i+=360 / 6)
+        {
+            add(Point(c.x + cos(i * M_PI / 180) * half_width, c.y + sin(i * M_PI / 180) * half_width));
+        }
+    }
+
+    void draw_lines() const;
+
+    private:
+    int half_width;
+    Point centre;
+
 };
 
 } // of namespace Graph_lib
